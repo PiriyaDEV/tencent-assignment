@@ -34,17 +34,18 @@ export default function Header() {
   }
 
   return (
-    <div className="fixed w-full bg-white top-0 shadow-lg z-[99]">
+    <div className="fixed w-full bg-white top-0 shadow-lg z-[99] dark:bg-darkTheme">
       <div className="max-w-screen-xl m-auto py-[15px]">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
-            <h1 className="text-[22px] font-bold cursor-pointer">
+            <h1 className="text-[22px] font-bold cursor-pointer dark:text-white">
               Tencent Assignment
             </h1>
           </Link>
 
           <div>
             <FormControlLabel
+              className="dark:text-white"
               control={
                 <ToggleModeSwitch
                   sx={{ m: 1 }}
@@ -59,11 +60,15 @@ export default function Header() {
 
         <div className="pt-[20px] flex items-center justify-between gap-[30px]">
           <Link href={"/"}>
-            <p className="text-[16px] cursor-pointer">Mainpage</p>
+            <p className="text-[16px] cursor-pointer dark:text-white hover:underline">
+              Mainpage
+            </p>
           </Link>
           {category.slice(1).map((item, index) => (
             <Link href={`/news?category=${item}`} key={index}>
-              <p className="text-[16px] cursor-pointer capitalize">{item}</p>
+              <p className="text-[16px] cursor-pointer capitalize dark:text-white hover:underline">
+                {item}
+              </p>
             </Link>
           ))}
         </div>

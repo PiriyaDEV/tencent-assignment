@@ -12,12 +12,13 @@ class MyDocument extends Document {
                   document.documentElement.classList.add('dark')
                 } else {
                   document.documentElement.classList.remove('dark')
+                  document.body.classList.add('dark-theme');
                 }
               `,
             }}
           ></script>
         </Head>
-        <body>
+        <body className="dark:bg-darkThemeBg">
           <Main />
           <NextScript />
         </body>

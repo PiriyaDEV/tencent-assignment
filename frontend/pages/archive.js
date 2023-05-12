@@ -58,14 +58,25 @@ export default function Archive() {
     }
   };
 
-  console.log(news);
+  const theme = {
+    light: {
+      backgroundColor: "bg-white",
+      selectedColor: "text-black",
+      headerColor: "text-black",
+    },
+    dark: {
+      backgroundColor: "bg-gray-700",
+      selectedColor: "text-white",
+      headerColor: "text-white",
+    },
+  };
 
   return (
     <>
       <Layout>
         <div id="news-all" className="max-w-screen-xl m-auto pb-[60px]">
           <div id="news-section" className="pb-[48px]">
-            <h1 className="text-[28px] xl:text-[32px] text-left">
+            <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
               Archive News
             </h1>
 
@@ -75,7 +86,7 @@ export default function Archive() {
                   defaultValue={keyword}
                   onChange={(e) => handleKeywordChange(e.target.value)}
                   placeholder={"Finding by Keyword"}
-                  className="w-full font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px]"
+                  className="w-full font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
                 />
                 <FontAwesomeIcon
                   icon={faSearch}
@@ -86,9 +97,15 @@ export default function Archive() {
 
             <div className="flex items-center justify-between gap-[50px]">
               <div className="flex items-center gap-[50px] w-full">
-                <h1 className="text-[20px] whitespace-nowrap">Time Range</h1>
+                <h1 className="text-[20px] whitespace-nowrap dark:text-white">
+                  Time Range
+                </h1>
                 <div className="date-picker relative w-full">
-                  <Datepicker value={date} onChange={handleDateChange} />
+                  <Datepicker
+                    value={date}
+                    onChange={handleDateChange}
+                    theme={theme}
+                  />
                   <FontAwesomeIcon
                     icon={faCalendar}
                     className="w-[25px] text-[25px] cursor-pointer absolute text-darkGray top-[14px] left-[15px] pointer-events-none"
@@ -97,12 +114,12 @@ export default function Archive() {
               </div>
 
               <div className="flex items-center gap-[50px]">
-                <h1 className="text-[20px] whitespace-nowrap">
+                <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Select Category
                 </h1>
                 <select
                   name="ordering"
-                  className="w-fit font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px]"
+                  className="w-fit font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
                   value={sort}
                   onChange={(event) => setSort(event.target.value)}
                 >

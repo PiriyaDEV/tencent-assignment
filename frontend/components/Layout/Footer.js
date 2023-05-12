@@ -3,23 +3,23 @@ const Footer = () => {
   return (
     <div
       id="footer"
-      className="pt-[48px] pb-[64px] border-t-[1px] border-lightGray2"
+      className="pt-[48px] pb-[64px] border-t-[1px] border-lightGray2 dark:bg-darkTheme"
     >
       <div className="max-w-screen-xl w-full mx-auto">
         <div className="flex flex-col gap-[16px] mt-[40px] items-center">
-          <p className="text-[24px] text-white-500 text-center font-medium">
+          <p className="text-[24px] text-white-500 text-center font-medium dark:text-white">
             Tencent Assignment
           </p>
         </div>
 
         <div className="flex flex-col gap-[16px] mt-[10px] items-center">
-          <p className="text-[24px] text-white-500 text-center font-medium">
+          <p className="text-[24px] text-white-500 text-center font-medium dark:text-white">
             By
           </p>
         </div>
 
         <div className="flex flex-col gap-[16px] mt-[10px] items-center">
-          <p className="text-[24px] text-white-500 text-center font-medium">
+          <p className="text-[24px] text-white-500 text-center font-medium dark:text-white">
             Piriya Chaigul
           </p>
           <div className="flex items-center gap-[45px]">

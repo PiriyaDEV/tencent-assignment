@@ -34,7 +34,7 @@ export default function NewsCard(props) {
         {!props.hideIcon && (
           <FontAwesomeIcon
             icon={faCircleChevronRight}
-            className="text-[24px] cursor-pointer text-white"
+            className="w-[24px] text-[24px] cursor-pointer text-white"
           />
         )}
       </div>

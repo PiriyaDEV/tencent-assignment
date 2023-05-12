@@ -34,7 +34,7 @@ export default function Home() {
           <div id="mainpage" className="grid grid-cols-4 gap-[50px]">
             <div className="col-span-3 items-start">
               <div className="flex justify-between">
-                <h1 className="text-[28px] xl:text-[32px] text-left">
+                <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                   Highlight News
                 </h1>
                 <AllButton />
@@ -56,7 +56,7 @@ export default function Home() {
               </div>
             </div>
             <div className="col-span-1 items-start">
-              <h1 className="text-[28px] xl:text-[32px] text-left">
+              <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                 Most Viewed News
               </h1>
               <div className="flex flex-col gap-[14px] mt-[22px]">
@@ -79,7 +79,7 @@ export default function Home() {
           {/* Highlight News in Each Category */}
           {category.slice(1).map((item, index) => (
             <div key={index} className="mt-[40px]">
-              <h1 className="text-[28px] xl:text-[32px] text-left capitalize">
+              <h1 className="text-[28px] xl:text-[32px] text-left capitalize dark:text-white">
                 Highlight from {item} News
               </h1>
               <div className="grid grid-cols-2 gap-[27px] mt-[38px]">

@@ -32,7 +32,7 @@ export default function Category() {
     <>
       <Layout>
         <div className="max-w-screen-xl m-auto pb-[60px]">
-          <h1 className="text-[36px] xl:text-[42px] text-left mb-[40px] font-bold capitalize">
+          <h1 className="text-[36px] xl:text-[42px] text-left mb-[40px] font-bold capitalize dark:text-white">
             {category}
           </h1>
 
@@ -40,7 +40,7 @@ export default function Category() {
           <div id="mainpage" className="grid grid-cols-4 gap-[50px]">
             <div className="col-span-3 items-start">
               <div className="flex justify-between">
-                <h1 className="text-[28px] xl:text-[32px] text-left">
+                <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                   Highlight News
                 </h1>
                 <AllButton />
@@ -62,7 +62,7 @@ export default function Category() {
               </div>
             </div>
             <div className="col-span-1 items-start">
-              <h1 className="text-[28px] xl:text-[32px] text-left">
+              <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                 Most Viewed News
               </h1>
               <div className="flex flex-col gap-[14px] mt-[22px]">
@@ -81,7 +81,7 @@ export default function Category() {
           </div>
 
           <div className="mt-[40px]">
-            <h1 className="text-[28px] xl:text-[32px] text-left">
+            <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
               Latest News
             </h1>
             <div className="grid grid-cols-2 gap-[27px] mt-[38px]">

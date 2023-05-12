@@ -10,7 +10,7 @@ export default function AllButton(props) {
       </h1>
       <FontAwesomeIcon
         icon={faCircleChevronRight}
-        className="mt-[4px] text-[24px] cursor-pointer text-blue"
+        className="mt-[4px] w-[24px] text-[24px] cursor-pointer text-blue"
       />
     </div>
   );

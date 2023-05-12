@@ -89,7 +89,7 @@ export default function NewsDetail() {
         <div className="max-w-screen-xl m-auto pb-[60px]">
           <div className="content-detail lg:pt-[0px]">
             <div className="mb-[46px]">
-              <p className="text-[18px] xl:text-[20px] font-medium text-left">
+              <p className="text-[18px] xl:text-[20px] font-medium text-left dark:text-white">
                 <a href={`/`} className="cursor-pointer">
                   Mainpage
                 </a>
@@ -115,11 +115,11 @@ export default function NewsDetail() {
 
               <div className="grid grid-cols-4 gap-[50px]">
                 <div className="col-span-3 items-start">
-                  <h1 className="text-[28px] xl:text-[32px] text-left capitalize mt-[25px]">
+                  <h1 className="text-[28px] xl:text-[32px] text-left capitalize mt-[25px] dark:text-white">
                     {content?.title}
                   </h1>
 
-                  <div className="w-[120px] border-[1px] border-black my-[22px]" />
+                  <div className="w-[120px] border-[1px] border-black my-[22px] dark:border-white" />
 
                   <div
                     className="w-full h-[500px] !bg-cover !bg-center rounded-[8px] mb-[20px]"
@@ -136,39 +136,41 @@ export default function NewsDetail() {
                     <div className="flex items-center gap-[12px]">
                       <FontAwesomeIcon
                         icon={faCalendar}
-                        className="text-[24px] cursor-pointer"
+                        className="w-[24px] text-[24px] cursor-pointer dark:text-white"
                       />
-                      <p className="text-[20px] mt-[3px]">
+                      <p className="text-[20px] mt-[3px] dark:text-white">
                         {getDateString(content?.datetime)}
                       </p>
                     </div>
                     <div className="flex items-center gap-[12px]">
                       <FontAwesomeIcon
                         icon={faPen}
-                        className="text-[24px] cursor-pointer"
+                        className="w-[24px] text-[24px] cursor-pointer dark:text-white"
                       />
-                      <p className="text-[20px] mt-[3px]">{content?.author}</p>
+                      <p className="text-[20px] mt-[3px] dark:text-white">
+                        {content?.author}
+                      </p>
                     </div>
                   </div>
 
-                  <div className="text-[18px] text-justify mt-[25px]">
+                  <div className="text-[18px] text-justify mt-[25px] dark:text-white">
                     {content?.content}
                   </div>
 
                   <div className="flex justify-end items-center gap-[18px] whitespace-nowrap">
-                    <div className="w-full border-[1px] border-black my-[22px]" />
+                    <div className="w-full border-[1px] border-black my-[22px] dark:border-white" />
                     <div className="flex gap-[0px] items-center">
                       <FontAwesomeIcon
                         icon={faChevronRight}
-                        className="text-[24px]"
+                        className="w-[24px] text-[24px] dark:text-white"
                       />
                       <FontAwesomeIcon
                         icon={faChevronRight}
-                        className="text-[24px]"
+                        className="w-[24px] text-[24px] dark:text-white"
                       />
                     </div>
                     <Link href={`/news?category=${content?.category}`}>
-                      <p className="text-[20px] cursor-pointer hover:underline">
+                      <p className="text-[20px] cursor-pointer hover:underline dark:text-white">
                         See All
                       </p>
                     </Link>
@@ -176,16 +178,16 @@ export default function NewsDetail() {
 
                   <div className="flex justify-end mt-[15px]">
                     <div className="flex flex-col items-start justify-end w-fit">
-                      <p className="mb-[10px] text-[20px]">Share : </p>
+                      <p className="mb-[10px] text-[20px] dark:text-white">Share : </p>
                       <div className="flex items-center justify-end gap-[25px]">
                         <FontAwesomeIcon
                           icon={faFacebook}
-                          className="transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#3b5998]"
+                          className="w-[40px] transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#3b5998]"
                           onClick={() => shareOnFacebook()}
                         />
                         <FontAwesomeIcon
                           icon={faLine}
-                          className="transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#06C755]"
+                          className="w-[40px] transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#06C755]"
                           onClick={() => shareOnLine()}
                         />
                         <div
@@ -202,7 +204,7 @@ export default function NewsDetail() {
                 </div>
 
                 <div className="col-span-1 items-start">
-                  <h1 className="text-[28px] xl:text-[32px] text-left">
+                  <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                     Most Viewed News
                   </h1>
                   <div className="flex flex-col gap-[14px] mt-[22px]">
@@ -224,7 +226,7 @@ export default function NewsDetail() {
           </div>
 
           <div className="mt-[40px]">
-            <h1 className="text-[28px] xl:text-[32px] text-left">
+            <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
               Related News
             </h1>
             <div className="grid grid-cols-2 gap-[27px] mt-[38px]">
