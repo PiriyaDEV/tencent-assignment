@@ -1,48 +1,26 @@
 import React from "react";
 const Footer = () => {
   return (
-    <div id="footer" className="pt-[48px] pb-[64px] border-t-[1px] border-lightGray2">
+    <div
+      id="footer"
+      className="pt-[48px] pb-[64px] border-t-[1px] border-lightGray2"
+    >
       <div className="max-w-screen-xl w-full mx-auto">
-        <div className="flex gap-[32px] items-center justify-center">
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            เกี่ยวกับโครงการ
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            ติวเตอร์ขั้นเทพ
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            ดูติวย้อนหลัง
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            ดูติวไลฟ์สด
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            Tips & Trick
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            อัพเดตโครงการ
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">
-            คำถามที่พบบ่อย
-          </p>
-          <p className="text-[16px] text-white-500 cursor-pointer">ติดต่อเรา</p>
-        </div>
-
         <div className="flex flex-col gap-[16px] mt-[40px] items-center">
           <p className="text-[24px] text-white-500 text-center font-medium">
-            ร่วมเปิดโอกาสสู่เยาวชนไทย
+            Tencent Assignment
           </p>
         </div>
 
-        <div className="flex flex-col gap-[16px] mt-[32px] items-center">
+        <div className="flex flex-col gap-[16px] mt-[10px] items-center">
           <p className="text-[24px] text-white-500 text-center font-medium">
-            ร่วมสนับสนุนหลักทางการศึกษา
+            By
           </p>
         </div>
 
-        <div className="flex flex-col gap-[16px] mt-[32px] items-center">
+        <div className="flex flex-col gap-[16px] mt-[10px] items-center">
           <p className="text-[24px] text-white-500 text-center font-medium">
-            ติดตามพวกเราได้ที่
+            Piriya Chaigul
           </p>
           <div className="flex items-center gap-[45px]">
             <i className="bi bi-facebook text-[52px] text-white-500"></i>

@@ -5,11 +5,15 @@ import HorizontalCard from "../components/News/HorizontalCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import Datepicker from "react-tailwindcss-datepicker";
+import Layout from "@/components/Layout/Layout";
+import { getNews } from "@/services/news.service";
+import Pagination from "@/components/Global/Pagination";
 
 export default function Archive() {
   const [keyword, setKeyword] = useState("");
 
   const [sort, setSort] = useState("desc");
+  const [page, setPage] = useState(1);
 
   const [date, setDate] = useState({
     startDate: new Date(
@@ -38,15 +42,34 @@ export default function Archive() {
     },
   ];
 
-  return (
-    <div id="news-all" className="pt-[135px] lg:pt-[0px]">
-      <div className="section">
-        <div className="page-container">
-          {/* ข่าวสาร */}
-          <div id="news-section" className="pt-[92px] pb-[48px]">
-            <h1 className="text-[28px] xl:text-[32px] text-left">ข่าวสาร</h1>
+  const [news, setNews] = useState([]);
 
-            <div className="my-[20px] flex flex-col lg:grid lg:grid-cols-2 items-start justify-between gap-[40px]">
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchNews();
+  }, []);
+
+  const fetchNews = async () => {
+    try {
+      let res = await getNews();
+      setNews(res.slice(0, 20));
+    } catch {
+      console.error();
+    }
+  };
+
+  console.log(news);
+
+  return (
+    <>
+      <Layout>
+        <div id="news-all" className="max-w-screen-xl m-auto pb-[60px]">
+          <div id="news-section" className="pb-[48px]">
+            <h1 className="text-[28px] xl:text-[32px] text-left">
+              Archive News
+            </h1>
+
+            <div className="my-[20px] flex flex-col items-start justify-between gap-[40px]">
               <div className="relative w-full">
                 <input
                   defaultValue={keyword}
@@ -56,63 +79,61 @@ export default function Archive() {
                 />
                 <FontAwesomeIcon
                   icon={faSearch}
-                  className="text-[25px] cursor-pointer absolute text-darkGray top-[12px] right-[15px] pointer-events-none"
+                  className="w-[25px] text-[25px] cursor-pointer absolute text-darkGray top-[12px] right-[15px] pointer-events-none"
                 />
               </div>
-              <div className="flex flex-col items-end gap-[15px] w-full">
-                <div className="flex items-center gap-[50px] w-full">
-                  <h1 className="text-[20px] whitespace-nowrap">Time Range</h1>
-                  <div className="date-picker relative w-full">
-                    <Datepicker value={date} onChange={handleDateChange} />
-                    <FontAwesomeIcon
-                      icon={faCalendar}
-                      className="text-[25px] cursor-pointer absolute text-darkGray top-[14px] left-[15px] pointer-events-none"
-                    />
-                  </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-[50px]">
+              <div className="flex items-center gap-[50px] w-full">
+                <h1 className="text-[20px] whitespace-nowrap">Time Range</h1>
+                <div className="date-picker relative w-full">
+                  <Datepicker value={date} onChange={handleDateChange} />
+                  <FontAwesomeIcon
+                    icon={faCalendar}
+                    className="w-[25px] text-[25px] cursor-pointer absolute text-darkGray top-[14px] left-[15px] pointer-events-none"
+                  />
                 </div>
-                <div className="flex items-center gap-[50px]">
-                  <h1 className="text-[20px] whitespace-nowrap">Sort By</h1>
-                  <select
-                    name="ordering"
-                    className="w-fit font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px]"
-                    value={sort}
-                    onChange={(event) => setSort(event.target.value)}
-                  >
-                    <option value="desc">Latest to Oldest</option>
-                    <option value="asc">Oldest to Lastest</option>
-                  </select>
-                </div>
+              </div>
+
+              <div className="flex items-center gap-[50px]">
+                <h1 className="text-[20px] whitespace-nowrap">
+                  Select Category
+                </h1>
+                <select
+                  name="ordering"
+                  className="w-fit font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px]"
+                  value={sort}
+                  onChange={(event) => setSort(event.target.value)}
+                >
+                  <option value="desc">Latest to Oldest</option>
+                  <option value="asc">Oldest to Lastest</option>
+                </select>
               </div>
             </div>
 
             <div className="flex flex-col gap-[27px] mt-[38px]">
-              {/* {newsData &&
-                newsData.map((item, i) => (
-                  <HorizontalCard
-                    data={item}
-                    key={i}
-                    page="newsAndActivity/news"
-                    lang={lang}
-                  />
-                ))} */}
+              {news?.map((item, i) => (
+                <HorizontalCard data={item || {}} key={i} />
+              ))}
             </div>
 
-            {/* {newsData && newsData.length <= 0 && (
+            {news && news.length <= 0 && (
               <p className="text-[25px] text-center mt-[40px]">
                 Not found any news ...
               </p>
-            )} */}
+            )}
 
-            {/* {newsData && (
+            {news && (
               <Pagination
-                length={meta?.pagination?.pageCount ?? ""}
+                length={10 ?? ""}
                 selected={page}
                 function={(i) => setPage(i)}
               />
-            )} */}
+            )}
           </div>
         </div>
-      </div>
-    </div>
+      </Layout>
+    </>
   );
 }
