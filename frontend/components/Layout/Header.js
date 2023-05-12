@@ -34,7 +34,7 @@ export default function Header() {
   }
 
   return (
-    <div className="fixed w-full bg-white top-0 shadow-lg z-[99] dark:bg-darkTheme px-[20px]">
+    <div className="fixed w-full bg-white top-0 shadow-lg z-[99] dark:bg-darkTheme py-[20px] xl:py-[0px] px-[20px]">
       <div className="max-w-screen-xl m-auto py-[15px]">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
@@ -43,7 +43,7 @@ export default function Header() {
             </h1>
           </Link>
 
-          <div>
+          <div className="hidden xl:flex">
             <FormControlLabel
               className="dark:text-white"
               control={
@@ -58,7 +58,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="pt-[20px] flex items-center justify-between gap-[30px]">
+        <div className="hidden pt-[20px] xl:flex items-center justify-between gap-[30px]">
           <Link href={"/"}>
             <p className="text-[16px] cursor-pointer dark:text-white hover:underline">
               Mainpage
