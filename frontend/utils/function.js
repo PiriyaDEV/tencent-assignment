@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 const getDate = (date, time) => {
   try {
     // date: m/d/yyyy
@@ -15,4 +17,17 @@ const getDate = (date, time) => {
   }
 };
 
-export { getDate };
+const getDateString = (datetime) => {
+  const formattedDate = dayjs(datetime).format("MMMM D, YYYY [at] h:mm A");
+  return formattedDate;
+};
+
+const getDateSplitString = (datetime) => {
+  const date = dayjs(datetime).format("DD");
+  const month = dayjs(datetime).format("MMM");
+  const year = dayjs(datetime).format("YYYY");
+  const time = dayjs(datetime).format("h:mm A");
+  return { date, month, year, time };
+};
+
+export { getDate, getDateString, getDateSplitString };

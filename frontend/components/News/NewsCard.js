@@ -1,3 +1,6 @@
+import { getDateString } from "@/utils/function";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import React from "react";
 // import timeFunction from "../../functions/getTime";
@@ -26,9 +29,14 @@ export default function NewsCard(props) {
       </Link>
       <div className="flex justify-between items-center mt-[9px] w-full">
         <h1 className="text-[12px] xl:text-[14px] text-white font-medium text-left">
-          12 ตค 2023
+          {getDateString(props.data?.datetime)}
         </h1>
-        {!props.hideIcon && <i className="bi bi-chevron-double-right"></i>}
+        {!props.hideIcon && (
+          <FontAwesomeIcon
+            icon={faCircleChevronRight}
+            className="text-[24px] cursor-pointer text-white"
+          />
+        )}
       </div>
     </div>
   );

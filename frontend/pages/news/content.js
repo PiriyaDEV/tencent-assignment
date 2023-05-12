@@ -13,8 +13,6 @@ export default function NewsDetail(props) {
 
   let [content, setContent] = useState({});
 
-  console.log(content);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchNews();

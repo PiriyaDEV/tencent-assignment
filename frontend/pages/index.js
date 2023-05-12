@@ -25,8 +25,6 @@ export default function Home() {
     }
   };
 
-  console.log(news);
-
   return (
     <>
       <Layout>
@@ -43,8 +41,6 @@ export default function Home() {
               <div className="mt-[22px]">
                 <NewsCard
                   data={NewsModel.getHighlighted(news, 0, 1)[0] || {}}
-                  page="newsAndActivity/news"
-                  // lang={lang}
                 />
               </div>
 
@@ -54,12 +50,7 @@ export default function Home() {
               >
                 {news &&
                   NewsModel.getHighlighted(news, 1, 5).map((item, i) => (
-                    <HorizontalCard
-                      size="small"
-                      data={item}
-                      key={i}
-                      page="newsAndActivity/news"
-                    />
+                    <HorizontalCard size="small" data={item || {}} key={i} />
                   ))}
               </div>
             </div>
@@ -72,13 +63,14 @@ export default function Home() {
                   NewsModel.getMostViewed(news, 0, 5).map((item, i) => (
                     <DateCard
                       key={i}
-                      data={item}
+                      data={item || {}}
                       hasBg={false}
-                      page="newsAndActivity/activity"
                       // lang={lang}
                     />
                   ))}
-                <AllButton />
+                <div className="self-end">
+                  <AllButton />
+                </div>
               </div>
             </div>
           </div>

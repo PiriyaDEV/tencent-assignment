@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function AllButton(props) {
   return (
@@ -6,8 +8,10 @@ export default function AllButton(props) {
       <h1 className="text-blue font-bold text-[18px] xl:text-[24px]">
         See more
       </h1>
-      <i className="bi bi-chevron-double-right"></i>
-      <i className="bi bi-facebook text-[52px] text-white-500"></i>
+      <FontAwesomeIcon
+        icon={faCircleChevronRight}
+        className="mt-[4px] text-[24px] cursor-pointer text-blue"
+      />
     </div>
   );
 }
