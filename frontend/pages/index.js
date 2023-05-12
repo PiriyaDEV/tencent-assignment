@@ -37,7 +37,7 @@ export default function Home() {
                 <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                   Highlight News
                 </h1>
-                <AllButton />
+                <AllButton href={"/archive"} />
               </div>
               <div className="mt-[22px]">
                 <NewsCard
@@ -70,7 +70,7 @@ export default function Home() {
                     />
                   ))}
                 <div className="self-end">
-                  <AllButton />
+                  <AllButton href={"/archive"} />
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function Home() {
                     .map((item, i) => <HorizontalCard data={item} key={i} />)}
               </div>
               <div className="mt-[20px] flex justify-end">
-                <AllButton />
+                <AllButton href={`news?category=${item}`} />
               </div>
             </div>
           ))}

@@ -178,7 +178,9 @@ export default function NewsDetail() {
 
                   <div className="flex justify-end mt-[15px]">
                     <div className="flex flex-col items-start justify-end w-fit">
-                      <p className="mb-[10px] text-[20px] dark:text-white">Share : </p>
+                      <p className="mb-[10px] text-[20px] dark:text-white">
+                        Share :{" "}
+                      </p>
                       <div className="flex items-center justify-end gap-[25px]">
                         <FontAwesomeIcon
                           icon={faFacebook}
@@ -217,7 +219,7 @@ export default function NewsDetail() {
                       />
                     ))}
                     <div className="self-end">
-                      <AllButton />
+                      <AllButton href={"/archive"} />
                     </div>
                   </div>
                 </div>
@@ -235,7 +237,7 @@ export default function NewsDetail() {
               ))}
             </div>
             <div className="mt-[20px] flex justify-end">
-              <AllButton />
+              <AllButton href={"/archive"} />
             </div>
           </div>
         </div>

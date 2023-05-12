@@ -7,17 +7,17 @@ import React from "react";
 
 export default function NewsCard(props) {
   return (
-    <div
-      className="cursor-pointer w-full h-[254px] rounded-[12px] items-start flex flex-col justify-end p-[18px] !bg-cover !bg-center"
-      style={
-        props.data
-          ? {
-              background: `url(${props.data.imageUrl})`,
-            }
-          : { background: `#D9D9D9` }
-      }
-    >
-      <Link href={`/news/content?id=${props.data.id}`}>
+    <Link href={`/news/content?id=${props.data.id}`}>
+      <div
+        className="cursor-pointer w-full h-[254px] rounded-[12px] items-start flex flex-col justify-end p-[18px] !bg-cover !bg-center"
+        style={
+          props.data
+            ? {
+                background: `url(${props.data.imageUrl})`,
+              }
+            : { background: `#D9D9D9` }
+        }
+      >
         <p
           className={
             `capitalize cursor-pointer text-[20px] xl:text-[24px] text-white font-medium text-left ` +
@@ -26,18 +26,18 @@ export default function NewsCard(props) {
         >
           {props.data?.title}
         </p>
-      </Link>
-      <div className="flex justify-between items-center mt-[9px] w-full">
-        <h1 className="text-[12px] xl:text-[14px] text-white font-medium text-left">
-          {getDateString(props.data?.datetime)}
-        </h1>
-        {!props.hideIcon && (
-          <FontAwesomeIcon
-            icon={faCircleChevronRight}
-            className="w-[24px] text-[24px] cursor-pointer text-white"
-          />
-        )}
+        <div className="flex justify-between items-center mt-[9px] w-full">
+          <h1 className="text-[12px] xl:text-[14px] text-white font-medium text-left">
+            {getDateString(props.data?.datetime)}
+          </h1>
+          {!props.hideIcon && (
+            <FontAwesomeIcon
+              icon={faCircleChevronRight}
+              className="w-[24px] text-[24px] cursor-pointer text-white"
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

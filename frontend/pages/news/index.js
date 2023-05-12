@@ -43,7 +43,7 @@ export default function Category() {
                 <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                   Highlight News
                 </h1>
-                <AllButton />
+                <AllButton href={"/archive"} />
               </div>
               <div className="mt-[22px]">
                 <NewsCard
@@ -75,7 +75,7 @@ export default function Category() {
                       // lang={lang}
                     />
                   ))}
-                <AllButton />
+                <AllButton href={"/archive"} />
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function Category() {
                 ))}
             </div>
             <div className="mt-[20px] flex justify-end">
-              <AllButton />
+              <AllButton href={"/archive"} />
             </div>
           </div>
         </div>
