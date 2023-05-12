@@ -31,8 +31,11 @@ export default function NewsDetail() {
   const fetchContent = async () => {
     try {
       let res = await getNewsById(id);
+      if (!res || Object.values(res).includes(undefined)) {
+        router.push("/");
+        return;
+      }
       setContent(res);
-
       await fetchMostViewedNews(res.category);
       await fetchRelatedNews(res.category);
     } catch {

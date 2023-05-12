@@ -22,7 +22,11 @@ export default function Category() {
   const fetchNews = async () => {
     try {
       let res = await getNews(category);
-      setNews(res);
+      if (res.length === 0) {
+        router.push("/");
+      } else {
+        setNews(res);
+      }
     } catch {
       console.error();
     }
