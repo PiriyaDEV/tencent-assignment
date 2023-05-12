@@ -9,7 +9,8 @@ export default new (class NewsModel {
     model.author = data?.author;
     model.content = data?.content;
     model.datetime = getDate(data?.date, data?.time);
-    model.imageUrl = data?.imageUrl;
+    // model.imageUrl = data?.imageUrl;
+    model.imageUrl = `https://picsum.photos/seed/${data?.id}/1000/270`;
     model.readMoreUrl = data?.readMoreUrl;
     model.title = data?.title;
     model.views = data?.views;

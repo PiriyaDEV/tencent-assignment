@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { getNews } from "../services/news.service";
 import NewsModel from "../models/News";
+import { category } from "@/constants/category";
 
 export default function Home() {
   const [news, setNews] = useState([]);
@@ -76,19 +77,17 @@ export default function Home() {
           </div>
 
           {/* Highlight News in Each Category */}
-          {[...Array(4)].map((item, index) => (
+          {category.slice(1).map((item, index) => (
             <div key={index} className="mt-[40px]">
-              <h1 className="text-[28px] xl:text-[32px] text-left">
-                Highlight News in Each Category {index + 1}
+              <h1 className="text-[28px] xl:text-[32px] text-left capitalize">
+                Highlight from {item} News
               </h1>
               <div className="grid grid-cols-2 gap-[27px] mt-[38px]">
-                {[...Array(4)].map((item, i) => (
-                  <HorizontalCard
-                    data={item}
-                    key={i}
-                    page="newsAndActivity/news"
-                  />
-                ))}
+                {news &&
+                  news
+                    .filter((_news) => _news.category === item)
+                    .slice(0, 4)
+                    .map((item, i) => <HorizontalCard data={item} key={i} />)}
               </div>
               <div className="mt-[20px] flex justify-end">
                 <AllButton />

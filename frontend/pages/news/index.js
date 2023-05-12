@@ -48,7 +48,6 @@ export default function Category() {
               <div className="mt-[22px]">
                 <NewsCard
                   data={NewsModel.getHighlighted(news, 0, 1)[0] || {}}
-                  category={category}
                 />
               </div>
 
@@ -56,14 +55,10 @@ export default function Category() {
                 id="mainpage-activity-section"
                 className="grid grid-cols-2 gap-[18px] mt-[14px]"
               >
-                {[...Array(4)].map((item, i) => (
-                  <HorizontalCard
-                    size="small"
-                    data={item}
-                    key={i}
-                    page="newsAndActivity/news"
-                  />
-                ))}
+                {news &&
+                  NewsModel.getHighlighted(news, 1, 5).map((item, i) => (
+                    <HorizontalCard size="small" data={item || {}} key={i} />
+                  ))}
               </div>
             </div>
             <div className="col-span-1 items-start">
@@ -71,15 +66,15 @@ export default function Category() {
                 Most Viewed News
               </h1>
               <div className="flex flex-col gap-[14px] mt-[22px]">
-                {[...Array(5)].map((item, i) => (
-                  <DateCard
-                    key={i}
-                    data={item}
-                    hasBg={false}
-                    page="newsAndActivity/activity"
-                    // lang={lang}
-                  />
-                ))}
+                {news &&
+                  NewsModel.getMostViewed(news, 0, 5).map((item, i) => (
+                    <DateCard
+                      key={i}
+                      data={item || {}}
+                      hasBg={false}
+                      // lang={lang}
+                    />
+                  ))}
                 <AllButton />
               </div>
             </div>
@@ -90,13 +85,10 @@ export default function Category() {
               Latest News
             </h1>
             <div className="grid grid-cols-2 gap-[27px] mt-[38px]">
-              {[...Array(6)].map((item, i) => (
-                <HorizontalCard
-                  data={item}
-                  key={i}
-                  page="newsAndActivity/news"
-                />
-              ))}
+              {news &&
+                NewsModel.getLatestNews(news, 0, 6).map((item, i) => (
+                  <HorizontalCard key={i} size="small" data={item || {}} />
+                ))}
             </div>
             <div className="mt-[20px] flex justify-end">
               <AllButton />
