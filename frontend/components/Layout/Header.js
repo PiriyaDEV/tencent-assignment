@@ -91,7 +91,7 @@ export default function Header() {
 
         <div className="pt-[20px] flex items-center justify-between gap-[30px]">
           <Link href={"/"}>
-            <p className="text-[16px] cursor-pointer">หน้าแรก</p>
+            <p className="text-[16px] cursor-pointer">Mainpage</p>
           </Link>
           {category.slice(1).map((item, index) => (
             <Link href={`/news?category=${item}`} key={index}>

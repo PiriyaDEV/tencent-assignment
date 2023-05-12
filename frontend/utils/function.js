@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import moment from "moment";
 
 const getDate = (date, time) => {
   try {
@@ -18,15 +18,15 @@ const getDate = (date, time) => {
 };
 
 const getDateString = (datetime) => {
-  const formattedDate = dayjs(datetime).format("MMMM D, YYYY [at] h:mm A");
+  const formattedDate = moment(datetime).format("MMMM D, YYYY [at] h:mm A");
   return formattedDate;
 };
 
 const getDateSplitString = (datetime) => {
-  const date = dayjs(datetime).format("DD");
-  const month = dayjs(datetime).format("MMM");
-  const year = dayjs(datetime).format("YYYY");
-  const time = dayjs(datetime).format("h:mm A");
+  const date = moment(datetime).format("DD");
+  const month = moment(datetime).format("MMM");
+  const year = moment(datetime).format("YYYY");
+  const time = moment(datetime).format("h:mm A");
   return { date, month, year, time };
 };
 

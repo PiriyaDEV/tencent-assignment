@@ -52,7 +52,7 @@ export default function HorizontalCard(props) {
         </p>
 
         <p className="text-right text-blue text-[14px] xl:text-[16px] font-bold cursor-pointer">
-          อ่านเพิ่มเติม
+          Read More
         </p>
       </div>
     </div>

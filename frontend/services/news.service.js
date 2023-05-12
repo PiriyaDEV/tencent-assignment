@@ -1,7 +1,7 @@
 import axios from "axios";
 import NewsModel from "../models/News";
 
-const getNews = async (category) => {
+const getNews = async (category, random = "no") => {
   try {
     let endpoint = "http://localhost:3001/news";
 
@@ -11,9 +11,19 @@ const getNews = async (category) => {
 
     const response = await axios.get(endpoint);
 
-    return await Promise.all(
+    const newsItems = await Promise.all(
       response.data.map((item) => NewsModel.create(item))
     );
+
+    if (random === "random") {
+      // Randomly sort the news items
+      const randomNewsItems = newsItems.sort(() => Math.random() - 0.5);
+
+      // Return the first 8 items (or fewer if there are not enough)
+      return randomNewsItems.slice(0, 8);
+    } else {
+      return newsItems;
+    }
   } catch (error) {
     console.error(error);
   }

@@ -1,27 +1,58 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendar,
+  faChevronRight,
+  faPen,
+} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
 import Layout from "@/components/Layout/Layout";
 import { useRouter } from "next/router";
-import NewsModel from "../../models/News";
-import { getNewsById } from "@/services/news.service";
+import { getNews, getNewsById } from "@/services/news.service";
+import Link from "next/link";
+import { getDateString } from "@/utils/function";
+import DateCard from "@/components/News/DateCard";
+import AllButton from "@/components/Global/AllButton";
+import HorizontalCard from "@/components/News/HorizontalCard";
 
-export default function NewsDetail(props) {
+export default function NewsDetail() {
   const router = useRouter();
   const id = router.query.id;
 
-  let [content, setContent] = useState({});
+  const [content, setContent] = useState({});
+  const [news, setNews] = useState([]);
+  const [relatedNews, setRelatedNews] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchNews();
+    fetchContent();
   }, [id]);
 
-  const fetchNews = async () => {
+  const fetchContent = async () => {
     try {
       let res = await getNewsById(id);
       setContent(res);
+
+      await fetchMostViewedNews(res.category);
+      await fetchRelatedNews(res.category);
+    } catch {
+      console.error();
+    }
+  };
+
+  const fetchMostViewedNews = async (category) => {
+    try {
+      let res = await getNews(category);
+      setNews(res.slice(0, 8));
+    } catch {
+      console.error();
+    }
+  };
+
+  const fetchRelatedNews = async (category) => {
+    try {
+      let res = await getNews(category, "random");
+      setRelatedNews(res.slice(0, 4));
     } catch {
       console.error();
     }
@@ -45,10 +76,9 @@ export default function NewsDetail(props) {
 
   const bannerName = () => {
     return [
-      { name: "News and Activity", href: "/newsAndActivity" },
-      { name: "News", href: "/newsAndActivity/news" },
+      { name: content?.category, href: `/news?category=${content?.category}` },
       {
-        name: "Event Name",
+        name: content?.title,
       },
     ];
   };
@@ -61,91 +91,149 @@ export default function NewsDetail(props) {
             <div className="mb-[46px]">
               <p className="text-[18px] xl:text-[20px] font-medium text-left">
                 <a href={`/`} className="cursor-pointer">
-                  หน้าหลัก
+                  Mainpage
                 </a>
                 {bannerName() &&
                   bannerName().map((item, i) => (
-                    <span key={i} className="capitalize cursor-pointer">
-                      {" "}
-                      / {item.name}
+                    <span key={i}>
+                      {item.href ? (
+                        <Link href={item.href}>
+                          <span className="capitalize cursor-pointer">
+                            {" "}
+                            / {item.name}
+                          </span>
+                        </Link>
+                      ) : (
+                        <span className="capitalize cursor-pointer">
+                          {" "}
+                          / {item.name}
+                        </span>
+                      )}
                     </span>
                   ))}
               </p>
 
-              <h1 className="text-[28px] xl:text-[32px] text-left capitalize mt-[25px]">
-                {content?.title}
-              </h1>
+              <div className="grid grid-cols-4 gap-[50px]">
+                <div className="col-span-3 items-start">
+                  <h1 className="text-[28px] xl:text-[32px] text-left capitalize mt-[25px]">
+                    {content?.title}
+                  </h1>
 
-              <div className="w-[120px] border-[1px] border-black my-[22px]" />
+                  <div className="w-[120px] border-[1px] border-black my-[22px]" />
 
-              <div className="flex justify-start items-start gap-[18px]">
-                <div className="flex items-center gap-[12px]">
-                  <FontAwesomeIcon
-                    icon={faCalendar}
-                    className="text-[24px] cursor-pointer"
+                  <div
+                    className="w-full h-[500px] !bg-cover !bg-center rounded-[8px] mb-[20px]"
+                    style={
+                      content
+                        ? {
+                            background: `url(${content?.imageUrl})`,
+                          }
+                        : { background: `#D9D9D9` }
+                    }
                   />
-                  <p className="text-[20px] mt-[3px]">12 ตค 2022</p>
+
+                  <div className="flex justify-start items-start gap-[18px]">
+                    <div className="flex items-center gap-[12px]">
+                      <FontAwesomeIcon
+                        icon={faCalendar}
+                        className="text-[24px] cursor-pointer"
+                      />
+                      <p className="text-[20px] mt-[3px]">
+                        {getDateString(content?.datetime)}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-[12px]">
+                      <FontAwesomeIcon
+                        icon={faPen}
+                        className="text-[24px] cursor-pointer"
+                      />
+                      <p className="text-[20px] mt-[3px]">{content?.author}</p>
+                    </div>
+                  </div>
+
+                  <div className="text-[18px] text-justify mt-[25px]">
+                    {content?.content}
+                  </div>
+
+                  <div className="flex justify-end items-center gap-[18px] whitespace-nowrap">
+                    <div className="w-full border-[1px] border-black my-[22px]" />
+                    <div className="flex gap-[0px] items-center">
+                      <FontAwesomeIcon
+                        icon={faChevronRight}
+                        className="text-[24px]"
+                      />
+                      <FontAwesomeIcon
+                        icon={faChevronRight}
+                        className="text-[24px]"
+                      />
+                    </div>
+                    <Link href={`/news?category=${content?.category}`}>
+                      <p className="text-[20px] cursor-pointer hover:underline">
+                        See All
+                      </p>
+                    </Link>
+                  </div>
+
+                  <div className="flex justify-end mt-[15px]">
+                    <div className="flex flex-col items-start justify-end w-fit">
+                      <p className="mb-[10px] text-[20px]">Share : </p>
+                      <div className="flex items-center justify-end gap-[25px]">
+                        <FontAwesomeIcon
+                          icon={faFacebook}
+                          className="transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#3b5998]"
+                          onClick={() => shareOnFacebook()}
+                        />
+                        <FontAwesomeIcon
+                          icon={faLine}
+                          className="transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#06C755]"
+                          onClick={() => shareOnLine()}
+                        />
+                        <div
+                          onClick={() => {
+                            navigator.clipboard.writeText(window.location.href);
+                          }}
+                          className="transition hover:scale-110 delay-50 cursor-pointer w-[45px] h-[45px] bg-lightGray hover:bg-lightGray rounded-full section text-[10px] p-[3px]"
+                        >
+                          Copy Link
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-[12px]">
-                  <p className="text-[20px] mt-[3px]">
-                    {[...Array(5)].map((item, i) => (
-                      <span key={i}>
-                        <>
-                          <span className="cursor-pointer text-blue hover:underline">
-                            #Tag {i + 1}
-                          </span>
-                          {i + 1 < 5 && ", "}
-                        </>
-                      </span>
+
+                <div className="col-span-1 items-start">
+                  <h1 className="text-[28px] xl:text-[32px] text-left">
+                    Most Viewed News
+                  </h1>
+                  <div className="flex flex-col gap-[14px] mt-[22px]">
+                    {news?.map((item, i) => (
+                      <DateCard
+                        key={i}
+                        data={item || {}}
+                        hasBg={false}
+                        // lang={lang}
+                      />
                     ))}
-                  </p>
-                </div>
-              </div>
-
-              <div>{content?.content}</div>
-
-              <div className="flex justify-end items-center gap-[18px] whitespace-nowrap">
-                <div className="w-full border-[1px] border-black my-[22px]" />
-                <div className="flex gap-[0px] items-center">
-                  <FontAwesomeIcon
-                    icon={faChevronRight}
-                    className="text-[24px]"
-                  />
-                  <FontAwesomeIcon
-                    icon={faChevronRight}
-                    className="text-[24px]"
-                  />
-                </div>
-                <p className="text-[20px] cursor-pointer hover:underline">
-                  ข่าวทั้งหมด
-                </p>
-              </div>
-
-              <div className="flex justify-end mt-[15px]">
-                <div className="flex flex-col items-start justify-end w-fit">
-                  <p className="mb-[10px] text-[20px]">Share : </p>
-                  <div className="flex items-center justify-end gap-[25px]">
-                    <FontAwesomeIcon
-                      icon={faFacebook}
-                      className="transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#3b5998]"
-                      onClick={() => shareOnFacebook()}
-                    />
-                    <FontAwesomeIcon
-                      icon={faLine}
-                      className="transition hover:scale-110 delay-50 text-[40px] cursor-pointer text-[#06C755]"
-                      onClick={() => shareOnLine()}
-                    />
-                    <div
-                      onClick={() => {
-                        navigator.clipboard.writeText(window.location.href);
-                      }}
-                      className="transition hover:scale-110 delay-50 cursor-pointer w-[45px] h-[45px] bg-lightGray hover:bg-lightGray rounded-full section text-[10px] p-[3px]"
-                    >
-                      Copy Link
+                    <div className="self-end">
+                      <AllButton />
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="mt-[40px]">
+            <h1 className="text-[28px] xl:text-[32px] text-left">
+              Related News
+            </h1>
+            <div className="grid grid-cols-2 gap-[27px] mt-[38px]">
+              {relatedNews?.map((item, i) => (
+                <HorizontalCard key={i} size="small" data={item || {}} />
+              ))}
+            </div>
+            <div className="mt-[20px] flex justify-end">
+              <AllButton />
             </div>
           </div>
         </div>
