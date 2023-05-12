@@ -95,7 +95,7 @@ export default function Archive() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between gap-[50px]">
+            <div className="flex xl:flex-row flex-col items-center justify-between gap-[20px] xl:gap-[50px]">
               <div className="flex items-center gap-[50px] w-full">
                 <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Time Range
@@ -113,13 +113,13 @@ export default function Archive() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-[50px]">
+              <div className="flex items-center gap-[50px] w-full">
                 <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Select Category
                 </h1>
                 <select
                   name="ordering"
-                  className="w-fit font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
+                  className="w-full font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
                   value={sort}
                   onChange={(event) => setSort(event.target.value)}
                 >

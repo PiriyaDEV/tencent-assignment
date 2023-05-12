@@ -31,13 +31,18 @@ export default function Home() {
       <Layout>
         <div className="max-w-screen-xl m-auto pb-[60px]">
           {/* Highlight */}
-          <div id="mainpage" className="grid grid-cols-4 gap-[50px]">
+          <div
+            id="mainpage"
+            className="flex flex-col xl:grid xl:grid-cols-4 gap-[50px]"
+          >
             <div className="col-span-3 items-start">
-              <div className="flex justify-between">
+              <div className="flex-col xl:flex-row flex items-start justify-between">
                 <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
                   Highlight News
                 </h1>
-                <AllButton href={"/archive"} />
+                <div className="flex xl:justify-start justify-end">
+                  <AllButton href={"/archive"} />
+                </div>
               </div>
               <div className="mt-[22px]">
                 <NewsCard
@@ -47,7 +52,7 @@ export default function Home() {
 
               <div
                 id="mainpage-activity-section"
-                className="grid grid-cols-2 gap-[18px] mt-[14px]"
+                className="flex flex-col xl:grid xl:grid-cols-2 gap-[18px] mt-[14px]"
               >
                 {news &&
                   NewsModel.getHighlighted(news, 1, 5).map((item, i) => (
@@ -82,7 +87,7 @@ export default function Home() {
               <h1 className="text-[28px] xl:text-[32px] text-left capitalize dark:text-white">
                 Highlight from {item} News
               </h1>
-              <div className="grid grid-cols-2 gap-[27px] mt-[38px]">
+              <div className="flex flex-col xl:grid xl:grid-cols-2 gap-[27px] mt-[38px]">
                 {news &&
                   news
                     .filter((_news) => _news.category === item)

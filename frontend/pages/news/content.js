@@ -116,7 +116,7 @@ export default function NewsDetail() {
                   ))}
               </p>
 
-              <div className="grid grid-cols-4 gap-[50px]">
+              <div className="flex flex-col xl:grid xl:grid-cols-4 gap-[50px]">
                 <div className="col-span-3 items-start">
                   <h1 className="text-[28px] xl:text-[32px] text-left capitalize mt-[25px] dark:text-white">
                     {content?.title}
@@ -125,7 +125,7 @@ export default function NewsDetail() {
                   <div className="w-[120px] border-[1px] border-black my-[22px] dark:border-white" />
 
                   <div
-                    className="w-full h-[500px] !bg-cover !bg-center rounded-[8px] mb-[20px]"
+                    className="w-full h-[250px] xl:h-[500px] !bg-cover !bg-center rounded-[8px] mb-[20px]"
                     style={
                       content
                         ? {
@@ -135,7 +135,7 @@ export default function NewsDetail() {
                     }
                   />
 
-                  <div className="flex justify-start items-start gap-[18px]">
+                  <div className="flex justify-start xl:flex-row flex-col items-start gap-[18px]">
                     <div className="flex items-center gap-[12px]">
                       <FontAwesomeIcon
                         icon={faCalendar}
@@ -234,7 +234,7 @@ export default function NewsDetail() {
             <h1 className="text-[28px] xl:text-[32px] text-left dark:text-white">
               Related News
             </h1>
-            <div className="grid grid-cols-2 gap-[27px] mt-[38px]">
+            <div className="flex flex-col xl:grid xl:grid-cols-2 gap-[27px] mt-[38px]">
               {relatedNews?.map((item, i) => (
                 <HorizontalCard key={i} size="small" data={item || {}} />
               ))}

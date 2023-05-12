@@ -34,7 +34,7 @@ export default function Header() {
   }
 
   return (
-    <div className="fixed w-full bg-white top-0 shadow-lg z-[99] dark:bg-darkTheme">
+    <div className="fixed w-full bg-white top-0 shadow-lg z-[99] dark:bg-darkTheme px-[20px]">
       <div className="max-w-screen-xl m-auto py-[15px]">
         <div className="flex items-center justify-between">
           <Link href={"/"}>

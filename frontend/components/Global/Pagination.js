@@ -5,7 +5,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 export default function Pagination(props) {
   if (props.length > 1)
     return (
-      <div className="pagination mt-[100px] section gap-[12px] flex items-center justify-center">
+      <div className="pagination mt-[100px] section gap-[12px] flex items-center justify-center flex-wrap">
         {[...Array(props.length)].map((item, i) => (
           <span key={i} className="text-[24px] font-medium cursor-pointer">
             <span
