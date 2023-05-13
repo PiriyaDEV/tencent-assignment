@@ -107,8 +107,8 @@ export default function Archive() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 items-center justify-between gap-[20px] xl:gap-[50px]">
-              <div className="flex items-center gap-[50px] w-full">
+            <div className="flex flex-col xl:grid xl:grid-cols-2 items-center justify-between gap-[20px] xl:gap-[50px]">
+              <div className="flex items-center gap-[20px] xl:gap-[50px] w-full">
                 <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Time Range
                 </h1>
@@ -125,7 +125,7 @@ export default function Archive() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-[50px] w-full">
+              <div className="flex items-center gap-[20px] xl:gap-[50px] w-full">
                 <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Select Category
                 </h1>
@@ -146,9 +146,9 @@ export default function Archive() {
               </div>
             </div>
 
-            <div className="mt-[20px] grid grid-cols-2 items-center gap-[20px] xl:gap-[50px]">
-              <span></span>
-              <div className="flex items-center gap-[50px] w-full">
+            <div className="mt-[20px] flex flex-col xl:grid xl:grid-cols-2 items-center gap-[20px] xl:gap-[50px]">
+              <span className="hidden xl:block"></span>
+              <div className="flex items-center gap-[20px] xl:gap-[50px] w-full">
                 <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Order By
                 </h1>

@@ -4,13 +4,17 @@ const getDate = (date, time) => {
   try {
     // date: yyyy-mm-dd
     // time: 04:45 PM
-    if (date && time) {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (date && time && dateRegex.test(date)) {
       const [year, month, day] = date.split("-");
       const [hours, minutes] = time.split(":").map((t) => parseInt(t));
       const isPM = time.split(" ")[1] === "PM";
       const adjustedHours = isPM ? hours + 12 : hours;
 
       return new Date(year, month - 1, day, adjustedHours, minutes);
+    } else {
+      throw new Error("Invalid date or time format.");
+      // or return null;
     }
   } catch (error) {
     console.error(error);

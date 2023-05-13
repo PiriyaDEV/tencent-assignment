@@ -5,6 +5,7 @@ import {
   faChevronRight,
   faPen,
   faTag,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
 import Layout from "@/components/Layout/Layout";
@@ -55,7 +56,10 @@ export default function NewsDetail() {
 
   const fetchRelatedNews = async (category) => {
     try {
-      let [_, res] = await getNews({ filter: { category: category }, random: true });
+      let [_, res] = await getNews({
+        filter: { category: category },
+        random: true,
+      });
       setRelatedNews(res.slice(0, 4));
     } catch (error) {
       console.error(error);
@@ -166,6 +170,17 @@ export default function NewsDetail() {
                         </p>
                       </Link>
                     </div>
+                    <div className="flex items-center gap-[12px]">
+                      <FontAwesomeIcon
+                        icon={faUser}
+                        className="w-[24px] text-[24px] cursor-pointer dark:text-white"
+                      />
+                      <Link href={`/news?category=${content?.category}`}>
+                        <p className="text-[20px] mt-[3px] dark:text-white capitalize">
+                          {content?.views} Views
+                        </p>
+                      </Link>
+                    </div>
                   </div>
 
                   <div className="text-[18px] text-justify mt-[25px] dark:text-white">
@@ -184,11 +199,14 @@ export default function NewsDetail() {
                         className="w-[24px] text-[24px] dark:text-white"
                       />
                     </div>
-                    <Link href={`/news?category=${content?.category}`}>
-                      <p className="text-[20px] cursor-pointer hover:underline dark:text-white">
-                        See All
-                      </p>
-                    </Link>
+                    <p
+                      className="text-[20px] cursor-pointer hover:underline dark:text-white"
+                      onClick={() => {
+                        window.open(content?.readMoreUrl, "_blank");
+                      }}
+                    >
+                      Read More
+                    </p>
                   </div>
 
                   <div className="flex justify-end mt-[15px]">

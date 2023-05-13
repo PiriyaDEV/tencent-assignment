@@ -1,7 +1,10 @@
 import { getDateSplitString } from "@/utils/function";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleChevronRight,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 export default function DateCard(props) {
@@ -41,9 +44,18 @@ export default function DateCard(props) {
           id="datecard-info"
           className={`w-full ${props.hasBg ? "text-white " : null}`}
         >
-          <p className="text-[18px] xl:text-[20px] font-medium text-left line-clamp-3 text-white">
-            {props.data?.title}
-          </p>
+          <div className="flex flex-col items-start gap-[8px]">
+            <p className="text-[18px] xl:text-[20px] font-medium text-left line-clamp-2 text-white">
+              {props.data?.title}
+            </p>
+            <span className="flex items-center gap-[10px] dark:text-white">
+              <FontAwesomeIcon
+                icon={faUser}
+                className="w-[12px] text-[12px] cursor-pointer"
+              />
+              <span>{props.data?.views} Views</span>
+            </span>
+          </div>
           <div className="flex justify-end mt-[8px]">
             <FontAwesomeIcon
               icon={faCircleChevronRight}
