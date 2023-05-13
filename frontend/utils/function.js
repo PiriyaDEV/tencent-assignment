@@ -2,10 +2,10 @@ import moment from "moment";
 
 const getDate = (date, time) => {
   try {
-    // date: m/d/yyyy
+    // date: yyyy-mm-dd
     // time: 04:45 PM
     if (date && time) {
-      const [month, day, year] = date.split("/");
+      const [year, month, day] = date.split("-");
       const [hours, minutes] = time.split(":").map((t) => parseInt(t));
       const isPM = time.split(" ")[1] === "PM";
       const adjustedHours = isPM ? hours + 12 : hours;

@@ -21,14 +21,14 @@ export default function Category() {
 
   const fetchNews = async () => {
     try {
-      let res = await getNews(category);
+      let [_, res] = await getNews({ filter: { category: category } });
       if (res.length === 0) {
         router.push("/");
       } else {
         setNews(res);
       }
-    } catch {
-      console.error();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -77,12 +77,7 @@ export default function Category() {
               <div className="flex flex-col gap-[14px] mt-[22px]">
                 {news &&
                   NewsModel.getMostViewed(news, 0, 5).map((item, i) => (
-                    <DateCard
-                      key={i}
-                      data={item || {}}
-                      hasBg={false}
-                      // lang={lang}
-                    />
+                    <DateCard key={i} data={item || {}} hasBg={false} />
                   ))}
                 <AllButton href={"/archive"} />
               </div>

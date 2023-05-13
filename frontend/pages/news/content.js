@@ -4,6 +4,7 @@ import {
   faCalendar,
   faChevronRight,
   faPen,
+  faTag,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook, faLine } from "@fortawesome/free-brands-svg-icons";
 import Layout from "@/components/Layout/Layout";
@@ -38,26 +39,26 @@ export default function NewsDetail() {
       setContent(res);
       await fetchMostViewedNews(res.category);
       await fetchRelatedNews(res.category);
-    } catch {
-      console.error();
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const fetchMostViewedNews = async (category) => {
     try {
-      let res = await getNews(category);
+      let [_, res] = await getNews({ filter: { category: category } });
       setNews(res.slice(0, 8));
-    } catch {
-      console.error();
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const fetchRelatedNews = async (category) => {
     try {
-      let res = await getNews(category, "random");
+      let [_, res] = await getNews({ filter: { category: category }, random: true });
       setRelatedNews(res.slice(0, 4));
-    } catch {
-      console.error();
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -154,6 +155,17 @@ export default function NewsDetail() {
                         {content?.author}
                       </p>
                     </div>
+                    <div className="flex items-center gap-[12px]">
+                      <FontAwesomeIcon
+                        icon={faTag}
+                        className="w-[24px] text-[24px] cursor-pointer dark:text-white"
+                      />
+                      <Link href={`/news?category=${content?.category}`}>
+                        <p className="text-[20px] mt-[3px] dark:text-white capitalize">
+                          {content?.category}
+                        </p>
+                      </Link>
+                    </div>
                   </div>
 
                   <div className="text-[18px] text-justify mt-[25px] dark:text-white">
@@ -199,7 +211,7 @@ export default function NewsDetail() {
                           onClick={() => {
                             navigator.clipboard.writeText(window.location.href);
                           }}
-                          className="transition hover:scale-110 delay-50 cursor-pointer w-[45px] h-[45px] bg-lightGray hover:bg-lightGray rounded-full section text-[10px] p-[3px]"
+                          className="flex items-center justify-center transition hover:scale-110 delay-50 cursor-pointer w-[45px] h-[45px] bg-lightGray hover:bg-lightGray rounded-full section text-[10px] p-[3px]"
                         >
                           Copy Link
                         </div>
@@ -214,15 +226,10 @@ export default function NewsDetail() {
                   </h1>
                   <div className="flex flex-col gap-[14px] mt-[22px]">
                     {news?.map((item, i) => (
-                      <DateCard
-                        key={i}
-                        data={item || {}}
-                        hasBg={false}
-                        // lang={lang}
-                      />
+                      <DateCard key={i} data={item || {}} hasBg={false} />
                     ))}
                     <div className="self-end">
-                      <AllButton href={"/archive"} />
+                      <AllButton href={`/news?category=${content?.category}`} />
                     </div>
                   </div>
                 </div>
@@ -240,7 +247,7 @@ export default function NewsDetail() {
               ))}
             </div>
             <div className="mt-[20px] flex justify-end">
-              <AllButton href={"/archive"} />
+              <AllButton href={`/news?category=${content?.category}`} />
             </div>
           </div>
         </div>

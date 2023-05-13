@@ -19,12 +19,14 @@ export default function Home() {
 
   const fetchNews = async () => {
     try {
-      let res = await getNews();
+      let [_, res] = await getNews();
       setNews(res);
-    } catch {
-      console.error();
+    } catch (error) {
+      console.error(error);
     }
   };
+
+  console.log(news);
 
   return (
     <>
@@ -45,19 +47,30 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-[22px]">
-                <NewsCard
-                  data={NewsModel.getHighlighted(news, 0, 1)[0] || {}}
-                />
+                {news.length !== 0 ? (
+                  <NewsCard
+                    data={NewsModel.getHighlighted(news, 0, 1)[0] || {}}
+                  />
+                ) : (
+                  <p className="text-[18px] dark:text-white text-left">
+                    No Content
+                  </p>
+                )}
               </div>
 
               <div
                 id="mainpage-activity-section"
                 className="flex flex-col xl:grid xl:grid-cols-2 gap-[18px] mt-[14px]"
               >
-                {news &&
+                {news.length !== 0 ? (
                   NewsModel.getHighlighted(news, 1, 5).map((item, i) => (
                     <HorizontalCard size="small" data={item || {}} key={i} />
-                  ))}
+                  ))
+                ) : (
+                  <p className="text-[18px] dark:text-white text-left">
+                    No Content
+                  </p>
+                )}
               </div>
             </div>
             <div className="col-span-1 items-start">
@@ -65,15 +78,15 @@ export default function Home() {
                 Most Viewed News
               </h1>
               <div className="flex flex-col gap-[14px] mt-[22px]">
-                {news &&
+                {news.length ? (
                   NewsModel.getMostViewed(news, 0, 5).map((item, i) => (
-                    <DateCard
-                      key={i}
-                      data={item || {}}
-                      hasBg={false}
-                      // lang={lang}
-                    />
-                  ))}
+                    <DateCard key={i} data={item || {}} hasBg={false} />
+                  ))
+                ) : (
+                  <p className="text-[18px] dark:text-white text-left">
+                    No Content
+                  </p>
+                )}
                 <div className="self-end">
                   <AllButton href={"/archive"} />
                 </div>
@@ -88,11 +101,16 @@ export default function Home() {
                 Highlight from {item} News
               </h1>
               <div className="flex flex-col xl:grid xl:grid-cols-2 gap-[27px] mt-[38px]">
-                {news &&
+                {news.length ? (
                   news
                     .filter((_news) => _news.category === item)
                     .slice(0, 4)
-                    .map((item, i) => <HorizontalCard data={item} key={i} />)}
+                    .map((item, i) => <HorizontalCard data={item} key={i} />)
+                ) : (
+                  <p className="text-[18px] dark:text-white text-left">
+                    No Content
+                  </p>
+                )}
               </div>
               <div className="mt-[20px] flex justify-end">
                 <AllButton href={`news?category=${item}`} />

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-// import AllButton from "../../components/button/AllButton";
 import HorizontalCard from "../components/News/HorizontalCard";
-// import Pagination from "../../components/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import Datepicker from "react-tailwindcss-datepicker";
 import Layout from "@/components/Layout/Layout";
 import { getNews } from "@/services/news.service";
 import Pagination from "@/components/Global/Pagination";
+import { category } from "@/constants/category";
 
 export default function Archive() {
   const [keyword, setKeyword] = useState("");
 
+  const [categorySort, setCategorySort] = useState("all");
   const [sort, setSort] = useState("desc");
   const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+  const [news, setNews] = useState([]);
 
   const [date, setDate] = useState({
     startDate: new Date(
@@ -28,33 +30,43 @@ export default function Archive() {
 
   const handleKeywordChange = (newKeyword) => {
     setKeyword(newKeyword);
-    // getNewsData();
   };
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
   };
 
-  const bannerText = [
-    { name: "News and Activity", href: "/newsAndActivity" },
-    {
-      name: "news",
-    },
-  ];
-
-  const [news, setNews] = useState([]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchNews();
-  }, []);
+  }, [keyword, categorySort, page, sort, date]);
 
   const fetchNews = async () => {
     try {
-      let res = await getNews();
-      setNews(res.slice(0, 20));
-    } catch {
-      console.error();
+      const options = {
+        filter: {},
+        pagination: {
+          page: page,
+        },
+        sort: {
+          field: "date",
+          order: sort,
+        },
+        dateRange: {
+          start: date.startDate,
+          end: date.endDate,
+        },
+      };
+
+      if (keyword != "") options.search = keyword;
+      if (categorySort != "all") options.filter.category = categorySort;
+
+      let [totalCount, res] = await getNews(options);
+
+      setPageCount(totalCount);
+      setNews(res);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -95,7 +107,7 @@ export default function Archive() {
               </div>
             </div>
 
-            <div className="flex xl:flex-row flex-col items-center justify-between gap-[20px] xl:gap-[50px]">
+            <div className="grid grid-cols-2 items-center justify-between gap-[20px] xl:gap-[50px]">
               <div className="flex items-center gap-[50px] w-full">
                 <h1 className="text-[20px] whitespace-nowrap dark:text-white">
                   Time Range
@@ -119,7 +131,30 @@ export default function Archive() {
                 </h1>
                 <select
                   name="ordering"
-                  className="w-full font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
+                  className="capitalize w-full font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
+                  value={categorySort}
+                  onChange={(event) => {
+                    setCategorySort(event.target.value);
+                  }}
+                >
+                  {category.map((item, i) => (
+                    <option value={item} key={i}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="mt-[20px] grid grid-cols-2 items-center gap-[20px] xl:gap-[50px]">
+              <span></span>
+              <div className="flex items-center gap-[50px] w-full">
+                <h1 className="text-[20px] whitespace-nowrap dark:text-white">
+                  Order By
+                </h1>
+                <select
+                  name="ordering"
+                  className="capitalize w-full font-normal text-[20px] py-[11px] px-[23px] border-[1px] border-darkGray rounded-[8px] dark:bg-darkBlue dark:text-white"
                   value={sort}
                   onChange={(event) => setSort(event.target.value)}
                 >
@@ -136,14 +171,14 @@ export default function Archive() {
             </div>
 
             {news && news.length <= 0 && (
-              <p className="text-[25px] text-center mt-[40px]">
+              <p className="text-[25px] text-center mt-[40px] dark:text-white">
                 Not found any news ...
               </p>
             )}
 
             {news && (
               <Pagination
-                length={10 ?? ""}
+                length={Math.ceil(pageCount / 10)}
                 selected={page}
                 function={(i) => setPage(i)}
               />

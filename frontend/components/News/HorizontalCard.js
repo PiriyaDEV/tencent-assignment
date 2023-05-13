@@ -1,7 +1,8 @@
 import { getDateString } from "@/utils/function";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
-// import timeFunction from "../../functions/getTime";
 
 export default function HorizontalCard(props) {
   return (
@@ -41,13 +42,20 @@ export default function HorizontalCard(props) {
 
         {props.noDate !== true && (
           <p
-            className={`text-left font-medium dark:text-white ${
+            className={`text-left font-medium dark:text-white flex items-center gap-[12px] ${
               props.size === "small"
                 ? "text-[10px] xl:text-[12px]"
                 : "text-[16px] xl:text-[18px] my-[5px]"
             }`}
           >
-            {getDateString(props.data?.datetime)}
+            <span>{getDateString(props.data?.datetime)}</span>{" "}
+            <span className="flex items-center gap-[10px]">
+              <FontAwesomeIcon
+                icon={faUser}
+                className="w-[12px] text-[12px] cursor-pointer dark:text-white"
+              />
+              <span>Views : {props.data?.views} Views</span>
+            </span>
           </p>
         )}
 

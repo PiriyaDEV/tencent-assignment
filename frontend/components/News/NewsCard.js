@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import React from "react";
-// import timeFunction from "../../functions/getTime";
 
 export default function NewsCard(props) {
   return (
