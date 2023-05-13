@@ -33,7 +33,6 @@ The content detail screen includes a button that allows users to share the artic
 
 - JSON Fake Server
 
-> npm install
 > npm start
 
 Finally, I would like to thank Tencent for the opportunity to take this online assessment test. I hope to have the chance to interview for the job in the near future.
