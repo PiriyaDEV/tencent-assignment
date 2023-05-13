@@ -18,28 +18,6 @@ export default new (class NewsModel {
     return model;
   }
 
-  // getHighlighted(news = [], start = 0, end) {
-  //   return news
-  //     .sort((newsA, newsB) => {
-  //       let dateResult, viewResult;
-
-  //       // Get the datetime values
-  //       const datetimeA = newsA["datetime"];
-  //       const datetimeB = newsB["datetime"];
-
-  //       // Get the views values
-  //       const viewsA = newsA["views"];
-  //       const viewsB = newsB["views"];
-
-  //       dateResult = datetimeB - datetimeA;
-  //       viewResult = viewsB - viewsA;
-
-  //       // If view result is equal, use date result otherwise use view result
-  //       return viewResult === 0 ? dateResult : viewResult;
-  //     })
-  //     .slice(start, end);
-  // }
-
   getHighlighted(newsData = [], start = 0, end) {
     const latestDate = Math.max(
       ...newsData.map((news) => new Date(`${news.date} ${news.time}`).getTime())
